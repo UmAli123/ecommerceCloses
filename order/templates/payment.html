@@ -1,0 +1,165 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="project">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="author" content="vinayak sharma">
+
+  <title>{{title}}</title>
+
+
+  <!-- bootstrap file -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- bootstrap file-->
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- main css -->
+  <link rel="stylesheet" type="text/css" href="{% static "index.css" %}" />
+
+
+  <!-- message here -->
+
+  {% if messages %}
+  {% for message in messages %}
+
+  <script>
+    alert("{{ message }}");
+  </script>
+
+  {% endfor %}
+  {% endif %}
+
+  <!--_______________________________________________-->
+
+
+
+</head>
+
+<body class="container-fluid">
+
+
+  <header class="row">
+
+    <!-- navbar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" class="styleheader" href="{% url "buyer" %}">Buyer user</a>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNavBar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url "buyer" %}">Home</a></li>
+
+            {% if user.is_authenticated %}
+            <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span> &nbsp; Logout</a></li>
+            {% else %}
+            <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> &nbsp; Sign up</a></li>
+            <li><a href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Log in</a></li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <br/>
+  <br>
+  <br>
+  <div class="row col-lg-8">
+    {% block start %}
+    {% if user.is_authenticated %}
+    <!---->
+
+
+
+
+    <div class="content-section col-md-8 col-md-offset-2">
+      <center>
+      <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;" action="{% url 'payment' id%}">
+        {% csrf_token %}
+        <table class="table">
+          <tr>
+            <th scope="row">Buyer Name:</th>
+            <input type="hidden" name="customer" id="customer">
+            <td>{{request.user}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Card Number</th>
+            <td><input type="text" name="Card_number" id="Card_number"></td>
+          </tr>
+          <tr>
+            <th scope="row">expDate </th>
+            <td><input type="text" name="expDate" id="expDate" value="MM/YY" ></td>
+          </tr>
+          <tr>
+            <th scope="row">PIN </th>
+            <td><input type="password" name="PIN" id="PIN" ></td>
+          </tr>
+          <tr>
+            <th scope="row">street</th>
+            <td><input type="text" name="street" id="street" class="from-control"></td>
+          </tr>
+          <tr>
+            <th scope="row">address</th>
+            <td><input type="text" name="address" id="address"></td>
+          </tr>
+          <tr>
+            <th scope="row">price</th>
+            <td><input type="text" name="price" id="price" value="{{product.price}}"></td>
+          </tr>
+          <tr>
+            <th scope="row">product </th>
+            <td><input type="text" name="Delivery_name" id="Delivery_name" value="{{product}}"></td>
+          </tr>
+          <tr>
+            <th scope="row">Quantity </th>
+            <td><input type="number" name="Quantity" id="Quantity" value="{{product}}"></td>
+          </tr>
+          <tr>
+            <th scope="row">Delivery name </th>
+            <td><input type="text" name="Delivery_name" id="Delivery_name"></td>
+          </tr>
+          <tr>
+          <th scope="row">comments </th>
+            <td>
+              <textarea name="comments" form="comments">Enter text here...</textarea></td>
+          </tr>
+          
+          
+         
+
+          
+          
+        </tbody>
+      </table> 
+       <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span> &nbsp; save</button>
+      </form>
+    </center>
+     </div>
+    {% else %}
+    <center><h1>log in, plz . . .</h1></center>
+    {% endif %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>

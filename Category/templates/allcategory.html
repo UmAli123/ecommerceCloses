@@ -1,0 +1,35 @@
+{% extends "./myindex.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+
+<br>
+<br>
+<div class="container-fluid">
+<table class="table" border="3">
+  <thead>
+    <tr>
+      
+      <th scope="col">category name</th>
+      <th scope="col">date add</th>
+      <th scope="col">laste Modified</th>
+      <th scope="col">sub name</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for  i in categories %}
+    <tr>
+      <th scope="row">{{i.Category_idea.category_name}}</th>
+      <td>{{i.Category_idea.date_add}}</td>
+      <td>{{i.Category_idea.laste_Modified}}</td>
+      <td>{{i.sub_name}}</td>
+    </tr>
+    
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
+{% endblock start %}

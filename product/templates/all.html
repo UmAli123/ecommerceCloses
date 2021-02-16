@@ -1,0 +1,44 @@
+{% extends "productIndex.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+
+<br>
+<br>
+<div class="container-fluid">
+<table class="table" border="3">
+  <thead>
+    <tr>
+      
+      <th scope="col"> name</th>
+      <th scope="col"> model</th>
+      <th scope="col">quntity</th>
+      <th scope="col">weight</th>
+      <th scope="col">receipt card number</th>
+
+
+      <th scope="col">update/delete</th>
+     
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for  i in Products %}
+    <tr>
+      <th scope="row">{{i.name}}</th>
+      <td>{{i.model}}</td>
+      <td>{{i.price}}</td>
+      <td>{{i.quntity}}</td>
+      <td>{{i.RecieveCard_number}}</td>
+
+      <td><a href="{% url 'product-update' i.id %}">update</a>/  <a href="{% url 'product-delete' i.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+
+
+
+{% endblock start %}

@@ -1,0 +1,33 @@
+{% extends "storeindex.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+
+<br>
+<br>
+<div class="container-fluid">
+<table class="table" border="3">
+  <thead>
+    <tr>
+      
+      <th scope="col"> name</th>
+      <th scope="col"> store name</th>
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for  i in Products %}
+    <tr>
+      <th scope="row">{{i.product}}</th>
+      <td>{{i.store}}</td>
+      
+    </tr>
+    
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
+{% endblock start %}
